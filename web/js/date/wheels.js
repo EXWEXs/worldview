@@ -67,7 +67,8 @@ var dateWheels = function(models, config) {
           $('#wv-date-mobile-label')
             .css('display', 'block');
         },
-        stepMinute: 10,
+        // stepMinute: 10,
+        stepMinute: 1,
         dateFormat: 'yyyy-mm-dd',
         setText: 'OK',
         timeFormat: 'T' + 'HH:ii:ss' + 'Z',

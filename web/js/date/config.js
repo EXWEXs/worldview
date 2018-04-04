@@ -605,17 +605,21 @@ export function timelineConfig(models, config, ui) {
 
         self.currentZoom = 3;
         break;
-      case 4: // 10-Minute
-        dateStep = 10;
+      case 4: // 1-Minute
+        // dateStep = 10;
+        dateStep = 1;
         labelFormat = d3.time.format.utc('%H:%M');
         dateInterval = d3.time.minutes;
-        tickCount = (tl.data.end() - tl.data.start()) / 1000 / 60 / 10;
-        tickWidth = 1;
-        tickCountMax = tl.width;
+        // tickCount = (tl.data.end() - tl.data.start()) / 1000 / 60 / 10;
+        tickCount = (tl.data.end() - tl.data.start()) / 1000 / 60;
+        // tickWidth = 1;
+        tickWidth = 5;
+        // tickCountMax = tl.width;
+        tickCountMax = Math.ceil(tl.width/tickWidth);
 
         paddedRange = [
-          new Date(tl.data.start().setUTCMinutes(tl.data.start().getUTCMinutes() - 50)),
-          new Date(tl.data.end().setUTCMinutes(tl.data.end().getUTCMinutes() + 50))
+          new Date(tl.data.start().setUTCMinutes(tl.data.start().getUTCMinutes() - 10)),
+          new Date(tl.data.end().setUTCMinutes(tl.data.end().getUTCMinutes() + 10))
         ];
 
         altEnd = new Date(tl.data.start()
@@ -644,7 +648,8 @@ export function timelineConfig(models, config, ui) {
         tl.zoom.current.ticks.normal.all = function () {
           tl.ticks.normal.all = tl.ticks.all.filter(function (d) {
             // This should be rewritten to be cleaner
-            if (d.getUTCHours() % 6 !== 0) {
+            // if (d.getUTCHours() % 6 !== 0) {
+            if (d.getUTCHours() % 1 !== 0) {
               return d;
             } else {
               return d.getUTCMinutes();
@@ -657,7 +662,8 @@ export function timelineConfig(models, config, ui) {
         // Creates wider ticks; use this to space those ticks
         tl.zoom.current.ticks.boundary.all = function () {
           tl.ticks.boundary.all = tl.ticks.all.filter(function (d) {
-            return d.getUTCHours() % 6 === 0 && d.getUTCMinutes() === 0;
+            // return d.getUTCHours() % 6 === 0 && d.getUTCMinutes() === 0;
+            return d.getUTCHours() % 1 === 0 && d.getUTCMinutes() === 0;
           });
         };
 
@@ -665,14 +671,16 @@ export function timelineConfig(models, config, ui) {
         // The interval in which the white hover label shows
         tl.zoom.current.ticks.boundary.next = function (current) {
           var next = new Date(current);
-          return new Date(next.setUTCHours(next.getUTCHours() + 6));
+          // return new Date(next.setUTCHours(next.getUTCHours() + 6));
+          return new Date(next.setUTCHours(next.getUTCHours() + 1));
         };
 
         // Calculated next normal tick by date
         // The interval in which the hover semi-transparent bg appears over ticks
         tl.zoom.current.ticks.normal.next = function (current) {
           var next = new Date(current);
-          return new Date(next.setUTCMinutes(next.getUTCMinutes() + 10));
+          // return new Date(next.setUTCMinutes(next.getUTCMinutes() + 10));
+          return new Date(next.setUTCMinutes(next.getUTCMinutes() + 1));
         };
 
         // Date of first printed boundary interval of this zoom level
@@ -682,7 +690,8 @@ export function timelineConfig(models, config, ui) {
             first.getUTCFullYear(),
             first.getUTCMonth(),
             first.getUTCDate(),
-            first.getUTCHours() - 6,
+            // first.getUTCHours() - 6,
+            first.getUTCHours() - 1,
             0));
         };
 
@@ -693,7 +702,8 @@ export function timelineConfig(models, config, ui) {
             first.getUTCMonth(),
             first.getUTCDate(),
             first.getUTCHours(),
-            first.getUTCMinutes() - 10));
+            // first.getUTCMinutes() - 10));
+            first.getUTCMinutes() - 1));
         };
 
         // Date of last printed boundary interval of this zoom level
@@ -703,7 +713,8 @@ export function timelineConfig(models, config, ui) {
             last.getUTCFullYear(),
             last.getUTCMonth(),
             last.getUTCDate(),
-            last.getUTCHours() + 6,
+            // last.getUTCHours() + 6,
+            last.getUTCHours() + 1,
             0));
         };
 
@@ -765,7 +776,8 @@ export function timelineConfig(models, config, ui) {
             d.getUTCMonth(),
             d.getUTCDate(),
             d.getUTCHours(),
-            d.getUTCMinutes() + 10));
+            // d.getUTCMinutes() + 10));
+            d.getUTCMinutes() + 1));
         };
 
         // When the date updates while dragging the pick backward
