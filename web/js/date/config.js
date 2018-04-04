@@ -648,7 +648,6 @@ export function timelineConfig(models, config, ui) {
         tl.zoom.current.ticks.normal.all = function () {
           tl.ticks.normal.all = tl.ticks.all.filter(function (d) {
             // This should be rewritten to be cleaner
-            // if (d.getUTCHours() % 6 !== 0) {
             if (d.getUTCHours() % 1 !== 0) {
               return d;
             } else {
@@ -662,7 +661,6 @@ export function timelineConfig(models, config, ui) {
         // Creates wider ticks; use this to space those ticks
         tl.zoom.current.ticks.boundary.all = function () {
           tl.ticks.boundary.all = tl.ticks.all.filter(function (d) {
-            // return d.getUTCHours() % 6 === 0 && d.getUTCMinutes() === 0;
             return d.getUTCHours() % 1 === 0 && d.getUTCMinutes() === 0;
           });
         };
@@ -671,7 +669,6 @@ export function timelineConfig(models, config, ui) {
         // The interval in which the white hover label shows
         tl.zoom.current.ticks.boundary.next = function (current) {
           var next = new Date(current);
-          // return new Date(next.setUTCHours(next.getUTCHours() + 6));
           return new Date(next.setUTCHours(next.getUTCHours() + 1));
         };
 
@@ -679,7 +676,6 @@ export function timelineConfig(models, config, ui) {
         // The interval in which the hover semi-transparent bg appears over ticks
         tl.zoom.current.ticks.normal.next = function (current) {
           var next = new Date(current);
-          // return new Date(next.setUTCMinutes(next.getUTCMinutes() + 10));
           return new Date(next.setUTCMinutes(next.getUTCMinutes() + 1));
         };
 
