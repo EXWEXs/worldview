@@ -23,7 +23,7 @@ export function timelineInput(models, config, ui) {
   var $decrementBtn = $('#left-arrow-group');
 
   var forwardNextMinute = function () { // FIXME: Limit animation correctly
-    self.delta = 10;
+    self.delta = 1;
     var nextMinute = new Date(new Date(model.selected)
       .setUTCMinutes(model.selected.getUTCMinutes() + 10));
     if (nextMinute <= util.now()) {
@@ -115,7 +115,7 @@ export function timelineInput(models, config, ui) {
   };
 
   var reversePrevMinute = function () {
-    self.delta = 10;
+    self.delta = 1;
     var prevMinute = new Date(new Date(model.selected)
       .setUTCMinutes(model.selected.getUTCMinutes() - 10));
     if (prevMinute >= tl.data.start()) {
