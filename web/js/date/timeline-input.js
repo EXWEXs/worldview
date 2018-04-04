@@ -25,9 +25,9 @@ export function timelineInput(models, config, ui) {
   var forwardNextMinute = function () { // FIXME: Limit animation correctly
     self.delta = 1;
     var nextMinute = new Date(new Date(model.selected)
-      .setUTCMinutes(model.selected.getUTCMinutes() + 10));
+      .setUTCMinutes(model.selected.getUTCMinutes() + 1));
     if (nextMinute <= util.now()) {
-      animateForward('minute', 10);
+      animateForward('minute', 1);
     } else {
       self.stop();
     }
@@ -117,9 +117,9 @@ export function timelineInput(models, config, ui) {
   var reversePrevMinute = function () {
     self.delta = 1;
     var prevMinute = new Date(new Date(model.selected)
-      .setUTCMinutes(model.selected.getUTCMinutes() - 10));
+      .setUTCMinutes(model.selected.getUTCMinutes() - 1));
     if (prevMinute >= tl.data.start()) {
-      animateReverse('minute', -10);
+      animateReverse('minute', -1);
     } else {
       self.stop();
     }
@@ -273,7 +273,7 @@ export function timelineInput(models, config, ui) {
           break;
         case 'minute-input-group':
           if ((newInput >= 0) && (newInput <= 59)) {
-            var coeff = 1000 * 60 * 10;
+            var coeff = 1000 * 60;
             selectedDateObj = new Date(Math.round(
               (new Date(model.selected))
                 .setUTCMinutes(newInput) / coeff) * coeff);
