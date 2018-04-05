@@ -767,7 +767,6 @@ export function timelineConfig(models, config, ui) {
 
         // When the date updates while dragging the pick forward
         tl.zoom.current.pick.nextChange = function (d) {
-          d = util.roundTimeTenMinute(d);
           return new Date(Date.UTC(d.getUTCFullYear(),
             d.getUTCMonth(),
             d.getUTCDate(),
@@ -778,7 +777,6 @@ export function timelineConfig(models, config, ui) {
 
         // When the date updates while dragging the pick backward
         tl.zoom.current.pick.prevChange = function (d) {
-          d = util.roundTimeTenMinute(d);
           return new Date(Date.UTC(d.getUTCFullYear(),
             d.getUTCMonth(),
             d.getUTCDate(),

@@ -7,7 +7,7 @@ import lodashIndexOf from 'lodash/indexOf';
 import util from '../util/util';
 
 export function animationWidget (models, config, ui) {
-  var zooms = ['yearly', 'monthly', 'daily', '10-Minute'];
+  var zooms = ['yearly', 'monthly', 'daily', 'minute'];
   var self = {};
   var timeline = ui.timeline;
   var model = models.anim;
@@ -156,7 +156,7 @@ export function animationWidget (models, config, ui) {
    */
   self.getIncrements = function () {
     if (models.date.maxZoom > 3) {
-      zooms = ['yearly', 'monthly', 'daily', '10-Minute'];
+      zooms = ['yearly', 'monthly', 'daily', 'minute'];
     } else {
       zooms = ['yearly', 'monthly', 'daily'];
     }
@@ -247,11 +247,11 @@ export function animationWidget (models, config, ui) {
     var today = new Date();
     var currentDate = new Date(models.date.selected);
     var interval = ui.anim.ui.getInterval();
-    if (models.date.selectedZoom === 4) {
-      intervalStep = 70;
-    } else {
+    // if (models.date.selectedZoom === 4) {
+    //   intervalStep = 70;
+    // } else {
       intervalStep = 7;
-    }
+    // }
     day = util.dateAdd(currentDate, interval, intervalStep);
     if (day > today) {
       model.rangeState.endDate = util.toISOStringSeconds(currentDate);

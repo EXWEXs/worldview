@@ -221,8 +221,6 @@ export function animationRangeSelect(models, config, ui) {
   self.updateRange = function (startLocation, EndLocation) {
     var startDate = timeline.x.invert(startLocation);
     var endDate = timeline.x.invert(EndLocation);
-    // var startDate = util.roundTimeTenMinute(timeline.x.invert(startLocation));
-    // var endDate = util.roundTimeTenMinute(timeline.x.invert(EndLocation));
     var state = model.rangeState;
     state.startDate = util.toISOStringSeconds(startDate) || 0;
     state.endDate = util.toISOStringSeconds(endDate);
